@@ -1,0 +1,92 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "system_nfc_services_credit_cards",
+		"description": "Activar el Pago NFC de una Tarjeta de Crédito, desde Movil Banking Personal (MBP).",
+		"version": "1.0.0"
+	},
+	"servers": [{
+		"url": "/bhd/mbp/v1/system/nfc-services"
+	}],
+	"paths": {
+		"/credit-cards": {
+			"post": {
+				"tags": ["NFC Services",
+				"Credit Cards"],
+				"operationId": "NFCServicesCreditCards",
+				"requestBody": {
+					"description": "Body",
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Request"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK"
+					},
+					"500": {
+						"description": "Internal Server Error."
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Request": {
+				"example": {
+					"channel": "MOBILE",
+					"transactionId": "94fe8563d52d450c86d9d587",
+					"deviceId": "4a452fbf-db6c-4e47-954b-2b4dc5b63d12",
+					"platform": "MBP",
+					"contactId": "CON-7867",
+					"productNumber": "12**********5678"
+				},
+				"type": "object",
+				"required": ["channel",
+				"platform",
+				"deviceId",
+				"transactionId",
+				"contactId",
+				"productNumber"],
+				"properties": {
+					"platform": {
+						"type": "string",
+						"description": "Plataforma que identifica la aplicación: MBP",
+						"example": "MBP"
+					},
+					"channel": {
+						"type": "string",
+						"description": "Canal que identifica la aplicación: MOBILE",
+						"example": "MOBILE"
+					},
+					"deviceId": {
+						"type": "string",
+						"description": "Identificador del dispositivo",
+						"example": "4a452fbf-db6c-4e47-954b-2b4dc5b63d12"
+					},
+					"transactionId": {
+						"type": "string",
+						"description": "Identificador único por cada invocación realizada",
+						"example": "OP-MBP-Accounts-RegNum-1"
+					},
+					"contactId": {
+						"type": "string",
+						"description": "Identificador único del contacto",
+						"example": "CON-78671"
+					},
+					"productNumber": {
+						"type": "string",
+						"description": "PAN/Número de la tarjeta de crédito",
+						"example": "12**********5678"
+					}
+				}
+			}
+		}
+	}
+}
